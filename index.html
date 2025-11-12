@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Horse Courses</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* =========================
+     Reset + Fonts
+  ============================ */
+  * {margin:0; padding:0; box-sizing:border-box; font-family:'Cairo', sans-serif;}
+  body {background:#0b0b0b; color:#fff; line-height:1.6;}
+  a {text-decoration:none; color:inherit;}
+
+  /* =========================
+     Header
+  ============================ */
+  header {display:flex; justify-content:space-between; align-items:center; padding:20px 50px; background:#0c0c0c; border-bottom:2px solid #d4af37;}
+  .logo {display:flex; align-items:center; gap:15px;}
+  .logo img {width:50px; height:50px;}
+  .logo h1 {font-size:24px; font-weight:700; color:#d4af37;}
+  nav a {margin-left:20px; font-weight:600; color:#fff; transition:0.3s;}
+  nav a:hover {color:#d4af37;}
+
+  /* =========================
+     Hero Section
+  ============================ */
+  .hero {display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:100px 20px; background:linear-gradient(180deg, #0b0b0b 0%, #1a1a1a 100%);}
+  .hero h2 {font-size:48px; margin-bottom:20px; color:#d4af37;}
+  .hero p {font-size:18px; margin-bottom:30px; color:#ccc; max-width:700px;}
+  .hero button {padding:15px 30px; background:#d4af37; color:#000; font-weight:700; border:none; border-radius:12px; cursor:pointer; font-size:16px; transition:0.3s;}
+  .hero button:hover {background:#b8942f;}
+
+  /* =========================
+     Courses Grid
+  ============================ */
+  .courses {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; padding:50px;}
+  .course-card {background:#111; border:1px solid #333; border-radius:16px; overflow:hidden; transition:0.3s;}
+  .course-card:hover {transform:translateY(-5px); border-color:#d4af37;}
+  .course-card img {width:100%; height:180px; object-fit:cover;}
+  .course-card-content {padding:20px;}
+  .course-card-content h3 {color:#d4af37; margin-bottom:10px; font-size:20px;}
+  .course-card-content p {color:#ccc; font-size:14px; margin-bottom:15px;}
+  .course-card-content .price {font-weight:700; color:#fff;}
+  .course-card-content button {margin-top:10px; padding:10px 20px; border:none; border-radius:10px; background:#d4af37; color:#000; font-weight:700; cursor:pointer; transition:0.3s;}
+  .course-card-content button:hover {background:#b8942f;}
+
+  /* =========================
+     Footer
+  ============================ */
+  footer {text-align:center; padding:30px 20px; color:#ccc; border-top:2px solid #d4af37; margin-top:50px;}
+
+  /* =========================
+     Responsive
+  ============================ */
+  @media(max-width:768px){
+    header {flex-direction:column; gap:15px;}
+    .hero h2 {font-size:36px;}
+    .hero p {font-size:16px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Black_Horse.svg/1200px-Black_Horse.svg.png" alt="حصان أسود">
+    <h1>Black Horse</h1>
+  </div>
+  <nav>
+    <a href="#hero">الرئيسية</a>
+    <a href="#courses">الكورسات</a>
+    <a href="#footer">تواصل معنا</a>
+  </nav>
+</header>
+
+<section class="hero" id="hero">
+  <h2>تعلم مهارات جديدة تفتح لك أبواب المستقبل</h2>
+  <p>Black Horse Courses تقدم لك أفضل الدورات العملية، مدرّسين خبرة، وشهادات يمكن عرضها على LinkedIn.</p>
+  <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">شاهد الكورسات</button>
+</section>
+
+<section class="courses" id="courses">
+  <div class="course-card">
+    <img src="https://images.unsplash.com/photo-1581091215360-3f3be8b45a35?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjA3fDB8MHxzZWFyY2h8MXx8d2ViJTIwZGV2ZWxvcG1lbnR8ZW58MHx8MHx8&ixlib=rb-4.0.3&q=80&w=400" alt="Web Development">
+    <div class="course-card-content">
+      <h3>تطوير الويب</h3>
+      <p>تعلم HTML, CSS, JavaScript لبناء مواقع حديثة تفاعلية.</p>
+      <div class="price">1200 EGP</div>
+      <button>سجل الآن</button>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <img src="https://images.unsplash.com/photo-1581091870622-2c84551ff0d1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjA3fDB8MHxzZWFyY2h8MXx8ZGF0YSUyMHNjaWVuY2V8ZW58MHx8MHx8&ixlib=rb-4.0.3&q=80&w=400" alt="Data Science">
+    <div class="course-card-content">
+      <h3>تحليل البيانات</h3>
+      <p>بايثون، تعلم آلي، مشاريع عملية لتقوية مهاراتك.</p>
+      <div class="price">1500 EGP</div>
+      <button>سجل الآن</button>
+    </div>
+  </div>
+
+  <div class="course-card">
+    <img src="https://images.unsplash.com/photo-1612832021487-bbb2d0cf6d07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxNjA3fDB8MHxzZWFyY2h8Mnx8dWl8ZW58MHx8MHx8&ixlib=rb-4.0.3&q=80&w=400" alt="UI/UX Design">
+    <div class="course-card-content">
+      <h3>تصميم واجهات وتجربة المستخدم</h3>
+      <p>تعلم تصميم واجهات جذابة وتجربة مستخدم رائعة لمشاريعك.</p>
+      <div class="price">900 EGP</div>
+      <button>سجل الآن</button>
+    </div>
+  </div>
+</section>
+
+<footer id="footer">
+  <p>© 2025 Black Horse Courses - جميع الحقوق محفوظة</p>
+</footer>
+
+</body>
+</html>
