@@ -1,226 +1,407 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Black Horse Courses - المنصة الاحترافية</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Black Horse Courses — منصة احترافية 7D</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
 <style>
-/* Reset + Fonts */
-* {margin:0; padding:0; box-sizing:border-box; font-family:'Cairo', sans-serif;}
-body {background:#0b0b0b; color:#fff; overflow-x:hidden; perspective:1000px;}
-a {text-decoration:none; color:inherit;}
-
-/* Cursor */
-.cursor {position:fixed; top:0; left:0; width:25px; height:25px; background: radial-gradient(circle, gold, transparent 50%); border-radius:50%; pointer-events:none; transform:translate(-50%, -50%); transition:0.1s; z-index:9999; mix-blend-mode: difference;}
-
-/* Navbar */
-header {display:flex; justify-content:space-between; align-items:center; padding:20px 50px; background:#0c0c0c; border-bottom:2px solid gold; position:fixed; width:100%; z-index:10; backdrop-filter:blur(10px);}
-.logo {display:flex; align-items:center; gap:15px;}
-.logo img {width:50px; height:50px; transition: transform 0.3s;}
-.logo img:hover {transform: rotate(-10deg) scale(1.1);}
-.logo h1 {font-size:28px; font-weight:700; color:gold;}
-nav ul {display:flex; list-style:none;}
-nav li {margin-left:25px; position:relative;}
-nav a {color:#fff; font-weight:600; position:relative; transition:0.3s;}
-nav a::after {content:''; position:absolute; bottom:-5px; left:0; width:0%; height:2px; background:gold; transition:0.3s;}
-nav a:hover::after {width:100%;}
-nav a:hover {color:gold;}
-
-/* Toggle button for mobile */
-.menu-toggle {display:none; flex-direction:column; cursor:pointer;}
-.menu-toggle .bar {height:3px; width:25px; background:gold; margin:4px 0; transition:0.3s;}
-
-/* Hero Section */
-.hero {display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:150px 20px 100px 20px; background:#0b0b0b url('https://images.unsplash.com/photo-1533682110306-31a95a7e53c0?fit=crop&w=1600') center/cover no-repeat; position:relative; overflow:hidden;}
-.hero::before {content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)); z-index:0;}
-.hero h2 {font-size:56px; margin-bottom:20px; background: linear-gradient(90deg, gold, #fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; animation: shine 3s linear infinite; z-index:1; position:relative;}
-.hero p {font-size:20px; margin-bottom:30px; color:#ccc; max-width:700px; line-height:1.5; z-index:1; position:relative;}
-.hero button {padding:20px 50px; background:gold; color:#000; font-weight:700; border:none; border-radius:18px; cursor:pointer; font-size:18px; transition:0.3s; z-index:1; position:relative;}
-.hero button:hover {background:#b8942f; transform:scale(1.1);}
-@keyframes shine {0%{background-position:-500px} 100%{background-position:500px;}}
-
-/* Particles */
-.particles {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0; overflow:hidden;}
-
-/* Courses */
-.courses {display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px; padding:50px;}
-.course-card {background:#111; border:1px solid #333; border-radius:20px; overflow:hidden; transition:0.5s; transform-style: preserve-3d; perspective:1000px; position:relative; box-shadow:0 0 20px rgba(255,215,0,0.2);}
-.course-card:hover {transform: rotateY(10deg) rotateX(5deg) translateY(-10px) scale(1.05); border-color:gold; box-shadow:0 0 40px rgba(255,215,0,0.7);}
-.course-card img {width:100%; height:180px; object-fit:cover; transition:0.5s;}
-.course-card img:hover {transform: scale(1.1);}
-.course-card-content {padding:20px;}
-.course-card-content h3 {color:gold; margin-bottom:10px; font-size:22px;}
-.course-card-content p {color:#ccc; font-size:14px; margin-bottom:15px;}
-.course-card-content .price,.course-card-content .duration,.course-card-content .level{color:#ccc; font-size:14px; margin-bottom:5px;}
-.course-card-content button {margin-top:10px; padding:12px 24px; border:none; border-radius:14px; background:gold; color:#000; font-weight:700; cursor:pointer; transition:0.3s;}
-.course-card-content button:hover {background:#b8942f; transform:scale(1.05);}
-
-/* Features */
-.features {display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:50px;}
-.feature-card {background:#111; border:1px solid #333; border-radius:20px; padding:30px; flex:1 1 250px; text-align:center; transition:0.3s; box-shadow:0 0 20px rgba(255,215,0,0.2);}
-.feature-card:hover {transform:translateY(-15px); border-color:gold; box-shadow:0 0 40px rgba(255,215,0,0.7);}
-.feature-card h3 {color:gold; margin-bottom:15px; font-size:20px;}
-.feature-card p {color:#ccc; font-size:14px;}
-
-/* Footer */
-.footer {text-align:center; padding:30px 20px; color:#ccc; border-top:2px solid gold; margin-top:50px;}
-
-/* FadeInUp animation */
-.fadeInUp {opacity:0; transform:translateY(40px); transition:all 0.8s ease-out;}
-.fadeInUp.show {opacity:1; transform:translateY(0);}
-
-/* Responsive */
-@media(max-width:768px){
-  header {flex-direction:column; gap:15px;}
-  nav ul {flex-direction:column; position:absolute; top:70px; right:0; background:#0c0c0c; width:200px; display:none; border-left:2px solid gold; border-bottom:2px solid gold; border-radius:0 0 10px 0;}
-  nav ul.show {display:flex;}
-  nav li {margin:15px 0; text-align:right; padding-right:20px;}
-  .menu-toggle {display:flex; margin-right:10px;}
-  .hero h2 {font-size:36px;}
-  .hero p {font-size:16px;}
-  .feature-card {flex:1 1 100%;}
+:root{
+  --bg:#05060a;
+  --card:#0e1220;
+  --glass: rgba(255,255,255,0.04);
+  --blue:#1e90ff;
+  --white:#ffffff;
+  --muted:#9aa7c0;
+  --accent:#00e6ff;
+  --radius:16px;
 }
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071026 80%);color:var(--white);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+
+/* progress bar */
+#progress{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--accent));width:0;z-index:9999}
+
+/* cursor trail */
+.cursor{position:fixed;pointer-events:none;z-index:99999;mix-blend-mode:screen}
+.cursor .dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle,var(--blue),transparent 40%);filter:drop-shadow(0 0 6px rgba(30,144,255,0.25))}
+
+/* header */
+header{position:fixed;left:0;right:0;top:0;z-index:1000;background:linear-gradient(180deg, rgba(5,6,10,0.75), rgba(5,6,10,0.45));backdrop-filter:blur(8px);border-bottom:1px solid rgba(30,144,255,0.06)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 22px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:54px;height:54px;cursor:pointer;transition:transform .35s}
+.brand h1{font-size:20px;color:var(--blue);margin:0}
+.nav{display:flex;gap:22px;align-items:center}
+.nav a{color:var(--white);font-weight:600;opacity:.95;padding:8px;border-radius:8px;transition:all .25s}
+.nav a:hover{color:var(--blue);background:rgba(30,144,255,0.04)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:24px;height:3px;background:var(--blue);border-radius:3px}
+
+/* hero */
+.hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;padding:120px 20px 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0;opacity:.25;filter:blur(20px);background:
+ radial-gradient(circle at 10% 20%, rgba(30,144,255,0.18), transparent 12%),
+ radial-gradient(circle at 80% 80%, rgba(0,230,255,0.12), transparent 12%) }
+.hero-content{position:relative;z-index:5;max-width:900px}
+.hero h2{font-size:48px;margin:0 0 16px;line-height:1.05;font-weight:900;background:linear-gradient(90deg,var(--white),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.shimmer{display:inline-block;position:relative}
+.hero p{color:var(--muted);font-size:18px;margin:0 0 24px}
+.cta{display:inline-flex;gap:12px;align-items:center;background:linear-gradient(180deg,var(--blue),#0077d9);padding:14px 22px;border-radius:12px;color:#001;cursor:pointer;font-weight:800;box-shadow:0 8px 30px rgba(30,144,255,.12);transform-style:preserve-3d}
+.cta:hover{transform:translateY(-6px) rotateX(6deg);box-shadow:0 18px 50px rgba(30,144,255,.16)}
+
+/* parallax accent */
+.hero .badge{position:absolute;left:8%;top:22%;background:linear-gradient(180deg, rgba(30,144,255,0.12), transparent);padding:12px;border-radius:12px;border:1px solid rgba(30,144,255,0.06);backdrop-filter:blur(4px);z-index:2}
+
+/* grid sections */
+.section{padding:60px 20px}
+.section h3{font-size:24px;color:var(--white);margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+
+/* course card with tilt */
+.card{background:linear-gradient(180deg,var(--card),#071726);border-radius:14px;padding:14px;border:1px solid rgba(255,255,255,0.03);overflow:hidden;position:relative;transform-style:preserve-3d}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:10px;display:block;transform-origin:center center}
+.card .title{color:var(--blue);font-weight:800;margin:12px 0 6px}
+.card .desc{color:var(--muted);font-size:14px;margin-bottom:8px}
+.card .meta{display:flex;gap:12px;color:#9db6d9;font-size:13px;margin-bottom:10px}
+.card .actions{display:flex;gap:10px}
+.btn{padding:10px 14px;border-radius:10px;border:none;cursor:pointer;font-weight:800}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--white)}
+.btn-primary{background:linear-gradient(90deg,var(--blue),var(--accent));color:#001;box-shadow:0 8px 30px rgba(30,144,255,.12)}
+
+/* modal video */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:2000;opacity:0;pointer-events:none;transition:all .25s}
+.modal.show{opacity:1;pointer-events:auto}
+.modal .panel{width:90%;max-width:960px;background:#071426;padding:14px;border-radius:12px;position:relative}
+.modal iframe{width:100%;height:540px;border-radius:8px;border:0}
+
+/* testimonials carousel */
+.carousel{display:flex;gap:18px;align-items:center;overflow:hidden;padding:12px}
+.testi{min-width:300px;background:linear-gradient(180deg,#0c1622,#071720);border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,.03)}
+.testi h4{color:var(--blue);margin:0 0 8px}
+.testi p{color:var(--muted);font-size:14px}
+
+/* footer */
+footer{padding:28px 20px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,.03);margin-top:40px}
+
+/* back to top */
+#topBtn{position:fixed;bottom:28px;left:28px;background:linear-gradient(90deg,var(--blue),var(--accent));border-radius:12px;padding:12px 14px;color:#001;border:none;cursor:pointer;box-shadow:0 12px 30px rgba(30,144,255,.12);z-index:999}
+
+/* responsive */
+@media(max-width:900px){
+  .hero h2{font-size:34px}
+  .modal iframe{height:320px}
+}
+@media(max-width:680px){
+  .nav{display:none}
+  .hamburger{display:block}
+  .hamburger.open ~ .nav{display:flex;position:absolute;right:14px;top:68px;background:#071026;padding:12px;border-radius:10px;flex-direction:column;gap:8px;z-index:1001}
+  .carousel{padding:0 6px}
+}
+
+/* little transitions */
+*{transition:all .18s ease}
 </style>
 </head>
 <body>
 
-<div class="cursor"></div>
+<div id="progress"></div>
+<div class="cursor"><div class="dot"></div></div>
 
 <header>
-  <div class="logo">
-    <img src="472571080_648913214131363_8475501952132933220_n.jpg" alt="حصان أسود">
-    <h1>Black Horse</h1>
+  <div class="header-inner container">
+    <div class="brand">
+      <!-- animated svg logo (simple stylized horse head) -->
+      <svg id="logoSVG" viewBox="0 0 120 120" xmlns="http://www.w3.org/472571080_648913214131363_8475501952132933220_n.jpg/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#00e6ff"/>
+            <stop offset="1" stop-color="#1e90ff"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(10,10)">
+          <path id="horse" d="M20 70 C20 45,50 40,60 30 C68 22,70 8,86 6 C96 4,104 12,104 24 C104 36,90 46,80 54 C70 62,58 64,48 70 C40 75,22 82,20 70 Z" fill="url(#g1)" opacity="0.95"/>
+        </g>
+      </svg>
+      <h1>Black Horse</h1>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="الرئيسية">
+      <a href="#hero">الرئيسية</a>
+      <a href="#courses">الكورسات</a>
+      <a href="#testimonials">آراء الطلاب</a>
+      <a href="#footer">تواصل</a>
+    </nav>
+
+    <div class="hamburger" id="hamb" aria-label="قائمة">
+      <div class="bar" style="background:var(--blue);width:22px;height:3px;margin:4px 0;border-radius:3px"></div>
+      <div class="bar" style="background:var(--blue);width:18px;height:3px;margin:4px 0;border-radius:3px"></div>
+      <div class="bar" style="background:var(--blue);width:14px;height:3px;margin:4px 0;border-radius:3px"></div>
+    </div>
   </div>
-  <div class="menu-toggle" id="mobile-menu">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
-  </div>
-  <nav>
-    <ul id="nav-list">
-      <li><a href="#hero">الرئيسية</a></li>
-      <li><a href="#courses">الكورسات</a></li>
-      <li><a href="#features">المميزات</a></li>
-      <li><a href="#footer">تواصل معنا</a></li>
-    </ul>
-  </nav>
 </header>
 
-<section class="hero" id="hero">
-  <div class="particles" id="particles"></div>
-  <h2>اصنع مستقبلك... <span style="color:#fff">ابدأ الآن</span></h2>
-  <p>تعلم <span style="color:gold">مهارات</span>، مشاريع واقعية، شهادات محترفة، فرص حقيقية!🐎 </p>
-  <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">شاهد الكورسات</button>
-</section>
-
-<section class="courses" id="courses">
-  <div class="course-card fadeInUp">
-    <img src="https://via.placeholder.com/400x180?text=Web+Development" alt="Web Development">
-    <div class="course-card-content">
-      <h3>تطوير الويب</h3>
-      <p>تعلم HTML, CSS, JavaScript لبناء مواقع حديثة تفاعلية ومشاريع Web متقدمة.</p>
-      <div class="price">1200 EGP</div>
-      <div class="duration">3 أشهر</div>
-      <div class="level">مبتدئ - متوسط</div>
-      <button>سجل الآن</button>
+<main>
+  <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="badge" aria-hidden="true" style="right:8%;top:18%;position:absolute;border-radius:12px;padding:10px 14px;background:linear-gradient(180deg,rgba(30,144,255,0.06),transparent);border:1px solid rgba(30,144,255,0.06);">
+      <small style="color:var(--muted);font-weight:700">منصة معتمدة</small>
     </div>
-  </div>
-  <div class="course-card fadeInUp">
-    <img src="https://via.placeholder.com/400x180?text=Data+Science" alt="Data Science">
-    <div class="course-card-content">
-      <h3>تحليل البيانات</h3>
-      <p>بايثون، تعلم آلي، مشاريع عملية، واستخراج رؤى حقيقية.</p>
-      <div class="price">1500 EGP</div>
-      <div class="duration">4 أشهر</div>
-      <div class="level">متوسط - متقدم</div>
-      <button>سجل الآن</button>
-    </div>
-  </div>
-  <div class="course-card fadeInUp">
-    <img src="https://via.placeholder.com/400x180?text=UI/UX+Design" alt="UI/UX Design">
-    <div class="course-card-content">
-      <h3>تصميم واجهات وتجربة المستخدم</h3>
-      <p>تعلم تصميم واجهات جذابة وتجربة مستخدم رائعة مع مشاريع تطبيقية.</p>
-      <div class="price">900 EGP</div>
-      <div class="duration">2.5 أشهر</div>
-      <div class="level">مبتدئ</div>
-      <button>سجل الآن</button>
-    </div>
-  </div>
-</section>
 
-<section class="features" id="features">
-  <div class="feature-card fadeInUp">
-    <h3>مدرسين محترفين</h3>
-    <p>أفضل الخبراء لتعليمك بشكل عملي واحترافي، دعم مستمر أثناء التعلم.</p>
-  </div>
-  <div class="feature-card fadeInUp">
-    <h3>شهادات موثوقة</h3>
-    <p>شهادات قابلة للعرض على LinkedIn مع توثيق كامل لمهاراتك وإنجازاتك.</p>
-  </div>
-  <div class="feature-card fadeInUp">
-    <h3>مشاريع عملية</h3>
-    <p>تطبيقات ومشاريع حقيقية لتقوية مهاراتك وتجهيزك لسوق العمل.</p>
-  </div>
-  <div class="feature-card fadeInUp">
-    <h3>منتدى تفاعلي</h3>
-    <p>تواصل مع المتعلمين الآخرين، اسأل واستفد من خبرات المجتمع.</p>
-  </div>
-</section>
+    <div class="hero-content container">
+      <h2>اصنع مستقبلك مع <span class="shimmer">Black Horse</span></h2>
+      <p>دورات عملية، مشاريع تنفيذية، ودعم توظيفي. كل حاجة علشان تخش سوق الشغل بقوة — متاحة أونلاين وعلى أكواد حقيقية.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="cta" id="openCourses">استعرض الكورسات</button>
+        <button class="cta" id="viewDemo" style="background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--white)">شاهد عرض تجريبي</button>
+      </div>
+    </div>
+  </section>
 
-<footer id="footer" class="footer">
-  <p>© 2025 Black Horse Courses - جميع الحقوق محفوظة</p>
+  <section class="section" id="courses">
+    <div class="container">
+      <h3>الكورسات المميزة</h3>
+      <div class="grid">
+        <!-- Course 1 -->
+        <article class="card" data-video="https://www.youtube.com/embed/3JZ_D3ELwOQ">
+          <img src="https://i.ibb.co/3cvj0XR/web.jpg" alt="Web Development">
+          <div class="title">تطوير الويب</div>
+          <div class="desc">HTML • CSS • JavaScript • React • مشاريع حقيقية</div>
+          <div class="meta"><span>المدة: 3 أشهر</span> • <span>المستوى: مبتدئ → محترف</span></div>
+          <div class="actions">
+            <button class="btn btn-primary preview">مشاهدة العرض</button>
+            <button class="btn btn-ghost">تفاصيل</button>
+          </div>
+        </article>
+
+        <!-- Course 2 -->
+        <article class="card" data-video="https://www.youtube.com/embed/VbfpW0pbvaU">
+          <img src="https://i.ibb.co/KjZv5yb/data.jpg" alt="Data Science">
+          <div class="title">تحليل البيانات</div>
+          <div class="desc">Python • Pandas • ML • مشاريع عملية</div>
+          <div class="meta"><span>المدة: 4 أشهر</span> • <span>المستوى: متوسط</span></div>
+          <div class="actions">
+            <button class="btn btn-primary preview">مشاهدة العرض</button>
+            <button class="btn btn-ghost">تفاصيل</button>
+          </div>
+        </article>
+
+        <!-- Course 3 -->
+        <article class="card" data-video="https://www.youtube.com/embed/Ke90Tje7VS0">
+          <img src="https://i.ibb.co/RvJ0QxK/uiux.jpg" alt="UI/UX">
+          <div class="title">تصميم واجهات UX/UI</div>
+          <div class="desc">Figma • UX Research • Prototyping • Design systems</div>
+          <div class="meta"><span>المدة: 2.5 شهر</span> • <span>المستوى: مبتدئ</span></div>
+          <div class="actions">
+            <button class="btn btn-primary preview">مشاهدة العرض</button>
+            <button class="btn btn-ghost">تفاصيل</button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="testimonials">
+    <div class="container">
+      <h3>آراء المتعلمين</h3>
+      <div class="carousel" id="carousel" aria-live="polite">
+        <div class="testi"><h4>محمد علي</h4><p>المنصة غيرت حياتي — المشاريع ساعدتني أشتغل فوراً.</p></div>
+        <div class="testi"><h4>سارة حسن</h4><p>المحتوى عملي والمحاضرين محترفين، أنصح 100%.</p></div>
+        <div class="testi"><h4>أحمد سمير</h4><p>سكيلز حقيقية وشغل عملي من أول كورس.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cta2" style="padding-bottom:120px">
+    <div class="container">
+      <h3>جاهز تبدأ؟</h3>
+      <p style="color:var(--muted);max-width:760px;margin:6px auto 14px">ابدأ الآن وسجل في كورس مجاني تعليمي لتجربة المنهج، واحصل على خصومات عند التسجيل الكامل.</p>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <button class="btn btn-primary">ابدأ الآن</button>
+        <button class="btn btn-ghost">تواصل معنا</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- modal for video -->
+<div class="modal" id="modal">
+  <div class="panel">
+    <button id="closeModal" style="position:absolute;right:12px;top:12px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer">✕</button>
+    <iframe id="videoFrame" src="" title="Video preview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<button id="topBtn" title="العودة للأعلى" aria-label="العودة للأعلى">⬆</button>
+
+<footer id="footer">
+  <div class="container">
+    <p>© 2025 Black Horse Courses — جميع الحقوق محفوظة</p>
+  </div>
 </footer>
 
 <script>
-// Cursor
+/* Basic helpers */
+const $ = selector => document.querySelector(selector);
+const $$ = selector => Array.from(document.querySelectorAll(selector));
+
+/* Scroll progress */
+const progress = $('#progress');
+document.addEventListener('scroll', ()=> {
+  const h = document.documentElement;
+  const percent = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  progress.style.width = percent + '%';
+});
+
+/* Cursor trail */
 const cursor = document.querySelector('.cursor');
-document.addEventListener('mousemove', e => {
-  cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-});
+const dot = cursor.querySelector('.dot');
+let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0;
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px'; });
 
-// FadeInUp Observer
-const faders = document.querySelectorAll('.fadeInUp');
-const options = {threshold:0.3};
-const observer = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add('show');
-      observer.unobserve(entry.target);
-    }
-  });
-}, options);
-faders.forEach(fader=>{observer.observe(fader);});
-
-// Particles
-const particlesContainer = document.getElementById('particles');
-const particleCount = 50;
-for(let i=0;i<particleCount;i++){
-  let p = document.createElement('div');
-  p.style.position='absolute';
-  p.style.width='6px';
-  p.style.height='6px';
-  p.style.background='gold';
-  p.style.borderRadius='50%';
-  p.style.top=Math.random()*window.innerHeight+'px';
-  p.style.left=Math.random()*window.innerWidth+'px';
-  p.style.opacity=Math.random();
-  p.style.animation=`move${i} ${5+Math.random()*5}s linear infinite alternate`;
-  particlesContainer.appendChild(p);
-
-  let style = document.createElement('style');
-  style.innerHTML=`@keyframes move${i}{0%{transform:translate(0,0)}100%{transform:translate(${Math.random()*200-100}px,${Math.random()*200-100}px)}}`;
-  document.head.appendChild(style);
+function animateDot(){
+  dotX += (mouseX - dotX) * 0.18;
+  dotY += (mouseY - dotY) * 0.18;
+  dot.style.transform = `translate(${dotX - mouseX}px, ${dotY - mouseY}px)`; // subtle trailing
+  requestAnimationFrame(animateDot);
 }
+animateDot();
 
-// Mobile Menu Toggle
-const menuToggle = document.getElementById('mobile-menu');
-const navList = document.getElementById('nav-list');
-menuToggle.addEventListener('click', () => {
-  navList.classList.toggle('show');
+/* Header logo animation small bounce */
+const logo = document.getElementById('logoSVG');
+logo.addEventListener('mouseenter', ()=> logo.style.transform = 'translateY(-6px) rotate(-4deg)');
+logo.addEventListener('mouseleave', ()=> logo.style.transform = 'translateY(0) rotate(0)');
+
+/* Hamburger menu for small screens */
+const hamb = document.getElementById('hamb');
+hamb.addEventListener('click', ()=> {
+  hamb.classList.toggle('open');
+  // toggle nav by manipulating style (for smaller screens CSS shows .hamburger.open ~ .nav)
+  document.querySelector('.nav').classList.toggle('open');
+  // also create a floating menu
+  if(document.querySelector('.nav').style.display === 'flex'){
+    document.querySelector('.nav').style.display = 'none';
+  } else {
+    document.querySelector('.nav').style.display = 'flex';
+    document.querySelector('.nav').style.flexDirection = 'column';
+    document.querySelector('.nav').style.position = 'absolute';
+    document.querySelector('.nav').style.top = '68px';
+    document.querySelector('.nav').style.right = '16px';
+    document.querySelector('.nav').style.background = '#071026';
+    document.querySelector('.nav').style.padding = '10px';
+    document.querySelector('.nav').style.borderRadius = '10px';
+  }
 });
-</script>
 
+/* Cards tilt (mouse move) */
+$$('.card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const r = card.getBoundingClientRect();
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    const px = (x / r.width - 0.5) * 18; // rotate range
+    const py = (y / r.height - 0.5) * -10;
+    card.style.transform = `perspective(800px) rotateY(${px}deg) rotateX(${py}deg) translateZ(8px)`;
+    const img = card.querySelector('img');
+    img.style.transform = `scale(1.06) translateZ(20px)`;
+  });
+  card.addEventListener('mouseleave', ()=> {
+    card.style.transform = '';
+    const img = card.querySelector('img');
+    img.style.transform = '';
+  });
+});
+
+/* preview modal & video */
+const modal = $('#modal');
+const iframe = $('#videoFrame');
+const previewBtns = $$('.preview');
+previewBtns.forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    const card = e.target.closest('.card');
+    const video = card.dataset.video;
+    iframe.src = video + '?autoplay=1&rel=0';
+    modal.classList.add('show');
+  });
+});
+$('#closeModal').addEventListener('click', ()=> {
+  modal.classList.remove('show');
+  iframe.src = '';
+});
+modal.addEventListener('click', (e)=> {
+  if(e.target === modal) { modal.classList.remove('show'); iframe.src = ''; }
+});
+
+/* Testimonials auto scroll (simple) */
+const carousel = $('#carousel');
+let carouselPos = 0;
+setInterval(()=> {
+  carouselPos += 320;
+  if(carouselPos > (carousel.scrollWidth - carousel.clientWidth)) carouselPos = 0;
+  carousel.scrollTo({left:carouselPos,behavior:'smooth'});
+}, 3500);
+
+/* back to top */
+const topBtn = $('#topBtn');
+topBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+window.addEventListener('scroll', ()=> {
+  topBtn.style.display = window.scrollY > 400 ? 'block' : 'none';
+});
+
+/* particles reactive (small) */
+const hero = document.querySelector('.hero');
+const pCount = 24;
+const partHolder = document.createElement('div');
+partHolder.style.position = 'absolute';
+partHolder.style.inset = 0;
+partHolder.style.pointerEvents = 'none';
+partHolder.style.zIndex = 1;
+hero.appendChild(partHolder);
+const parts = [];
+for(let i=0;i<pCount;i++){
+  const d = document.createElement('div');
+  d.style.position='absolute';
+  d.style.width = (6 + Math.random()*8) + 'px';
+  d.style.height = d.style.width;
+  d.style.borderRadius = '50%';
+  d.style.background = i%2? 'rgba(30,144,255,0.14)':'rgba(0,230,255,0.09)';
+  d.style.left = Math.random()*100 + '%';
+  d.style.top = Math.random()*100 + '%';
+  d.style.transform = `translate(-50%,-50%)`;
+  d.style.transition = 'transform 3s linear';
+  partHolder.appendChild(d);
+  parts.push(d);
+}
+hero.addEventListener('mousemove', (e)=>{
+  const rect = hero.getBoundingClientRect();
+  const mx = (e.clientX - rect.left)/rect.width - 0.5;
+  const my = (e.clientY - rect.top)/rect.height - 0.5;
+  parts.forEach((p,idx)=>{
+    const mv = (idx%4+1) * 8;
+    p.style.transform = `translate(${mx * mv}px, ${my * mv}px)`;
+  });
+});
+
+/* small entrance animation for fadeInUp elements using IntersectionObserver */
+const observer = new IntersectionObserver((entries,obs)=>{
+  entries.forEach(ent=>{
+    if(ent.isIntersecting){ ent.target.classList.add('visible'); ent.target.style.opacity=1; ent.target.style.transform='translateY(0)'; obs.unobserve(ent.target); }
+  });
+},{threshold:0.2});
+$$('.card').forEach(c=>{ c.style.opacity=0; c.style.transform='translateY(20px)'; observer.observe(c); });
+$$('.testi').forEach(t=>{ t.style.opacity=0; t.style.transform='translateY(20px)'; observer.observe(t); });
+
+/* accessibility: close modal with escape */
+document.addEventListener('keydown', e => { if(e.key === 'Escape'){ modal.classList.remove('show'); iframe.src=''; } });
+
+/* small logo pulse animation */
+setInterval(()=> {
+  logo.style.transform = 'scale(1.05)';
+  setTimeout(()=> logo.style.transform = 'scale(1)', 420);
+}, 4200);
+</script>
 </body>
 </html>
